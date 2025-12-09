@@ -32,4 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
       targetUrl: targetUrl
     });
   };
+
+  // Keyboard shortcut: Enter key to switch to existing tab
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      // Trigger the same action as the switch button
+      chrome.windows.update(existingWindowId, { focused: true });
+      chrome.tabs.update(existingTabId, { active: true });
+      chrome.tabs.getCurrent((tab) => {
+        chrome.tabs.remove(tab.id);
+      });
+    }
+  });
 });
