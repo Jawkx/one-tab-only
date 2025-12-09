@@ -6,6 +6,17 @@
 <body>
   <h2>One Tab Only</h2>
   
+  <div class="settings-section">
+    <h3>Settings</h3>
+    <div class="setting-item">
+      <label for="scope-select">Detection Scope:</label>
+      <select id="scope-select" class="scope-dropdown">
+        <option value="all-windows">All Windows</option>
+        <option value="current-window">Current Window Only</option>
+      </select>
+    </div>
+  </div>
+  
   <div id="current-site-container">
     <p>Current: <span id="current-host" style="color: #bb86fc;">...</span></p>
     <button id="add-btn" class="btn-primary">Limit this Domain</button>

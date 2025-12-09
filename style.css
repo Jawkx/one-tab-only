@@ -34,6 +34,55 @@ button {
   border-radius: 4px;
 }
 
+/* Settings Section */
+.settings-section {
+  background: #2c2c2c;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  border: 1px solid #3a3a3a;
+}
+
+.settings-section h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #bb86fc;
+}
+
+.setting-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.setting-item label {
+  font-size: 12px;
+  color: #b0b0b0;
+  font-weight: 500;
+}
+
+.scope-dropdown {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.scope-dropdown:hover {
+  border-color: #777;
+}
+
+.scope-dropdown:focus {
+  outline: none;
+  border-color: #bb86fc;
+}
+
 /* Intervention Page Specifics */
 .intervention-container {
   display: flex;

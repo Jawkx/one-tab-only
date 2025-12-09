@@ -2,8 +2,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   const hostSpan = document.getElementById('current-host');
   const addBtn = document.getElementById('add-btn');
   const listContainer = document.getElementById('watchlist');
+  const scopeSelect = document.getElementById('scope-select');
 
-  // 1. Get current tab info
+  // 1. Load scope setting
+  const { scope = 'all-windows' } = await chrome.storage.sync.get('scope');
+  scopeSelect.value = scope;
+
+  // 2. Handle scope changes
+  scopeSelect.onchange = async (e) => {
+    await chrome.storage.sync.set({ scope: e.target.value });
+  };
+
+  // 3. Get current tab info
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab || !tab.url.startsWith('http')) {
     hostSpan.textContent = "N/A";
@@ -16,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     addBtn.onclick = () => addToWatchlist(url.hostname);
   }
 
-  // 2. Load and render list
+  // 4. Load and render list
   renderList();
 
   async function addToWatchlist(hostname) {

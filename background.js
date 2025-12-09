@@ -28,11 +28,11 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   // Only trigger when URL changes and is fully loading
   if (changeInfo.status === 'loading' && tab.url) {
-    checkOneTabRule(tabId, tab.url);
+    checkOneTabRule(tabId, tab.url, tab);
   }
 });
 
-async function checkOneTabRule(newTabId, newUrlString) {
+async function checkOneTabRule(newTabId, newUrlString, newTab) {
   try {
     const newUrl = new URL(newUrlString);
     const hostname = newUrl.hostname;
@@ -41,11 +41,26 @@ async function checkOneTabRule(newTabId, newUrlString) {
     if (allowedSessions.has(`${newTabId}|${hostname}`)) return;
 
     // 1. Check if this hostname is in our watchlist
-    const { watchlist = [] } = await chrome.storage.sync.get('watchlist');
+    const { watchlist = [], scope = 'all-windows' } = await chrome.storage.sync.get(['watchlist', 'scope']);
     if (!watchlist.includes(hostname)) return;
 
-    // 2. Find other tabs with the same hostname
-    const tabs = await chrome.tabs.query({});
+    // 2. Use the tab object passed from onUpdated (with fallback for safety)
+    let currentWindowId;
+    if (newTab && newTab.windowId !== undefined) {
+      currentWindowId = newTab.windowId;
+    } else {
+      // Fallback: if tab object is somehow missing, fetch it
+      const t = await chrome.tabs.get(newTabId);
+      currentWindowId = t.windowId;
+    }
+
+    // 3. Find other tabs with the same hostname
+    // Build query based on scope setting
+    const queryOptions = scope === 'current-window' 
+      ? { windowId: currentWindowId }
+      : {}; // Empty object searches all windows
+    
+    const tabs = await chrome.tabs.query(queryOptions);
 
     // Filter for matches, excluding the current new tab
     const duplicate = tabs.find(t => {
@@ -57,7 +72,10 @@ async function checkOneTabRule(newTabId, newUrlString) {
       } catch (e) { return false; }
     });
 
-    // 3. If duplicate found, intervene!
+    // Debug logging to help verify behavior
+    console.log(`[OneTab] Checking ${hostname} | Scope: ${scope} | Window: ${currentWindowId} | Found duplicate: ${duplicate ? duplicate.id : 'None'}`);
+
+    // 4. If duplicate found, intervene!
     if (duplicate) {
       const interventionUrl = chrome.runtime.getURL('intervention.html') +
         `?target=${encodeURIComponent(newUrlString)}` +
