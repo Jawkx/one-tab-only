@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "One Tab Only",
+  "version": "1.0",
+  "description": "Prevents opening duplicate tabs for specific websites.",
+  "permissions": [
+    "tabs",
+    "storage",
+    "webNavigation"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Manage One Tab List"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

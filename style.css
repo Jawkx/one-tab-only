@@ -1,0 +1,46 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1e1e1e; /* Dark Mode Background */
+  color: #e0e0e0;            /* Light Text */
+  margin: 0;
+  padding: 16px;
+  width: 300px;
+}
+
+h2 { font-size: 18px; margin-top: 0; }
+
+button {
+  cursor: pointer;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.btn-primary { background-color: #3700b3; color: white; width: 100%; }
+.btn-primary:hover { background-color: #6200ea; }
+
+.btn-secondary { background-color: #333; color: #fff; border: 1px solid #555; }
+.btn-danger { background-color: #cf6679; color: black; padding: 4px 8px; font-size: 12px;}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2c2c2c;
+  padding: 8px;
+  margin-top: 8px;
+  border-radius: 4px;
+}
+
+/* Intervention Page Specifics */
+.intervention-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%; /* Full width for the tab */
+  text-align: center;
+}
