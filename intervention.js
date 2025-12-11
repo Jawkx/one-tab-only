@@ -24,7 +24,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // Button 2: Open Anyway (Ignore)
+  // Button 2: Close Old & Continue (Replace)
+  document.getElementById('replace-btn').onclick = () => {
+    // 1. Close the existing/original tab
+    chrome.tabs.remove(existingTabId);
+    // 2. Navigate this tab to the target (uses existing ALLOW_BYPASS logic)
+    chrome.runtime.sendMessage({
+      action: "ALLOW_BYPASS",
+      targetUrl: targetUrl
+    });
+  };
+
+  // Button 3: Open Anyway (Ignore)
   document.getElementById('ignore-btn').onclick = () => {
     // Send message to background script to whitelist this session
     chrome.runtime.sendMessage({
