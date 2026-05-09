@@ -1,36 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>One Tab Only - Warning</title>
+  <meta charset="UTF-8">
+  <title>One Tab Only — Already Open</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Override width for full page */
-    body { width: 100%; height: 100vh; overflow: hidden; display: flex; justify-content: center; align-items: center;}
-  </style>
 </head>
-<body>
+<body class="intervention-page">
   <div class="intervention-container">
-    <h1 style="font-size: 3rem; margin-bottom: 10px;">Hold on!</h1>
-    <p style="font-size: 1.2rem; color: #b0b0b0;">
-      You already have <strong id="domain-name" style="color: #bb86fc;">this site</strong> open.
+    <div class="intervention-badge">Duplicate Tab Detected</div>
+
+    <h1 class="intervention-title">Hold on a sec.</h1>
+
+    <p class="intervention-sub">
+      You already have <strong id="domain-name">this site</strong> open in another tab.
     </p>
 
-    <div style="margin-top: 30px; display: flex; gap: 20px;">
-      <button id="switch-btn" class="btn-primary" style="font-size: 1.2rem; padding: 15px 30px;">
-        Switch to Existing Tab
-      </button>
-      
-      <button id="replace-btn" class="btn-secondary" style="font-size: 1.2rem; padding: 15px 30px;">
-        Close Old & Continue
-      </button>
-      
-      <button id="ignore-btn" class="btn-secondary" style="font-size: 1.2rem; padding: 15px 30px;">
-        Open Anyway
-      </button>
+    <div class="intervention-actions">
+      <button id="switch-btn" class="btn-primary">Switch to existing tab</button>
+      <button id="replace-btn" class="btn-secondary">Close old &amp; continue</button>
+      <button id="ignore-btn" class="btn-secondary">Open anyway</button>
     </div>
 
-    <p style="margin-top: 20px; font-size: 0.9rem; color: #888;">
-      Press <kbd style="background: #333; padding: 2px 6px; border-radius: 3px; border: 1px solid #555;">Enter</kbd> to switch
+    <p class="intervention-hint">
+      Press <kbd>Enter</kbd> to switch
     </p>
   </div>
 

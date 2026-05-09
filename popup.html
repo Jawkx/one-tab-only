@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h2>One Tab Only</h2>
-  
+
+  <div id="current-site-container">
+    <p class="current-site-label">Current site</p>
+    <div class="current-site-host">
+      <span id="current-host">...</span>
+    </div>
+    <button id="add-btn" class="btn-primary">+ Limit this domain</button>
+  </div>
+
   <div class="settings-section">
     <h3>Settings</h3>
     <div class="setting-item">
-      <label for="scope-select">Detection Scope:</label>
+      <label for="scope-select">Detection scope</label>
       <select id="scope-select" class="scope-dropdown">
-        <option value="all-windows">All Windows</option>
-        <option value="current-window">Current Window Only</option>
+        <option value="all-windows">All windows</option>
+        <option value="current-window">Current window only</option>
       </select>
     </div>
-  </div>
-  
-  <div id="current-site-container">
-    <p>Current: <span id="current-host" style="color: #bb86fc;">...</span></p>
-    <button id="add-btn" class="btn-primary">Limit this Domain</button>
   </div>
 
   <h3>Watchlist</h3>
   <div id="watchlist">
-    <!-- List items will be injected here via JS -->
+    <!-- List items injected via JS -->
   </div>
 
   <script src="popup.js"></script>

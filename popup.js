@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     listContainer.innerHTML = '';
 
     if (watchlist.length === 0) {
-      listContainer.innerHTML = '<p style="color:#777; font-size:12px">No domains watched.</p>';
+      listContainer.innerHTML = '<div class="empty-state">No domains watched yet.<br>Add one above to get started.</div>';
       return;
     }
 
@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       const div = document.createElement('div');
       div.className = 'list-item';
       div.innerHTML = `
-        <span>${host}</span>
-        <button class="delete-btn btn-danger">Remove</button>
+        <span title="${host}">${host}</span>
+        <button class="delete-btn btn-danger" aria-label="Remove ${host}">Remove</button>
       `;
       div.querySelector('.delete-btn').onclick = () => removeFromWatchlist(host);
       listContainer.appendChild(div);
