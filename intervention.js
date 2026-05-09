@@ -24,7 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // Button 2: Close Old & Continue (Replace)
+  // Button 2: Replace existing tab with the attempted URL
+  document.getElementById('replace-existing-btn').onclick = () => {
+    chrome.windows.update(existingWindowId, { focused: true });
+    chrome.tabs.update(existingTabId, { url: targetUrl, active: true });
+    chrome.tabs.getCurrent((tab) => {
+      chrome.tabs.remove(tab.id);
+    });
+  };
+
+  // Button 3: Close Old & Continue (Replace)
   document.getElementById('replace-btn').onclick = () => {
     // 1. Close the existing/original tab
     chrome.tabs.remove(existingTabId);
@@ -35,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // Button 3: Open Anyway (Ignore)
+  // Button 4: Open Anyway (Ignore)
   document.getElementById('ignore-btn').onclick = () => {
     // Send message to background script to whitelist this session
     chrome.runtime.sendMessage({
