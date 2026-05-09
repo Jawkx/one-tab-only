@@ -4,16 +4,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   const listContainer = document.getElementById('watchlist');
   const scopeSelect = document.getElementById('scope-select');
 
-  // 1. Load scope setting
   const { scope = 'all-windows' } = await chrome.storage.sync.get('scope');
   scopeSelect.value = scope;
 
-  // 2. Handle scope changes
   scopeSelect.onchange = async (e) => {
     await chrome.storage.sync.set({ scope: e.target.value });
   };
 
-  // 3. Get current tab info
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab || !tab.url.startsWith('http')) {
     hostSpan.textContent = "N/A";
@@ -26,13 +23,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     addBtn.onclick = () => addToWatchlist(url.hostname);
   }
 
-  // 4. Load and render list
   renderList();
 
   async function addToWatchlist(hostname) {
     const { watchlist = [] } = await chrome.storage.sync.get('watchlist');
     
-    // Avoid duplicates
     if (!watchlist.includes(hostname)) {
       const newList = [...watchlist, hostname];
       await chrome.storage.sync.set({ watchlist: newList });

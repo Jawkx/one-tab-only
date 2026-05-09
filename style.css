@@ -85,7 +85,7 @@ p { margin: 0; }
   margin-bottom: 14px;
 }
 
-.settings-section { /* keep old class working */
+.settings-section {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
